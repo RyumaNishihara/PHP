@@ -91,12 +91,33 @@
   }
 
   echo '<br>';
-  
+
   // ! 否定の論理演算子
   if(!0) {
     echo 'true';
   } else {
     echo 'false';
+  }
+
+  echo '<br>';
+
+  //issetとemptyの使い分け（条件分岐と一緒によく使われる）
+  //isset：変数が定義されていて、null以外の値の時にtrueを返す。
+  $a = 0;
+  $b = 1;
+  if(isset($a)) {
+    echo 'isset: true';
+  } else {
+    echo 'isset: false';
+  }
+  
+  echo '<br>';
+
+  //empty；issetがfalse、または値がfalsyな時にtrueを返す。(!否定の論理演算子と一緒によく使われる)
+  if (!empty($a)) {
+    echo 'empty: true';
+  } else {
+    echo 'empty: false';
   }
 ?>
 
