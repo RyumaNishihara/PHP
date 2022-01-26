@@ -112,12 +112,24 @@
   }
   
   echo '<br>';
-
+  
   //empty；issetがfalse、または値がfalsyな時にtrueを返す。(!否定の論理演算子と一緒によく使われる)
   if (!empty($a)) {
     echo 'empty: true';
   } else {
     echo 'empty: false';
+  }
+  echo '<br>';
+  
+  //条件分岐、理解度チェック
+  $price = 1;
+  $amount = 2;
+  $sum = $price * $amount;
+  //phpの場合、一般的には０のチェックなどはemptyを使って処理する。
+  if(!empty($sum)) {
+    echo "{$price}円の商品を{$amount}個買ったので合計金額は{$sum}円です。";
+  } else {
+    echo '何か商品を買いましょう。';
   }
 ?>
 
