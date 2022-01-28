@@ -88,4 +88,21 @@
     print_r($val) . '<br>';
     echo "{$val[0]}は、{$val[1]}円です。", '<br>';
   }
+
+  //連想配列を使ってみよう。通常の配列と同じ様な操作で問題無い。
+  // キー => 値
+  $arry3 = [
+    'name' => 'Bob',
+    'age' => 12,
+    'sports' => ['baseball', 'swimming'],
+  ];
+
+  //unset()は、連想配列の指定したキーを削除する。
+  unset($arry3['name']);
+  print_r($arry3). '<br>';
+  // echo $arry3['name']. '<br>';
+  echo $arry3['age']. '<br>';
+  $arry3['age'] += 24;
+  echo $arry3['age']. '<br>';
+  echo $arry3['sports'][1]. '<br>';
 ?>
