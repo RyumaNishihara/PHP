@@ -83,4 +83,36 @@
   $arry3['age'] += 24;
   echo $arry3['age']. '<br>';
   echo $arry3['sports'][1]. '<br>';
+
+  //配列、理解度チェック
+  //問１
+  $products = [
+    'table' => [1000, 2],
+    'chair' => [500, 4],
+    'bed' => [10000, 1],
+    'light' => [5000, 1],
+  ];
+  echo '<div>商品一覧</div>';
+  foreach($products as $key => $val) {
+    echo "<div>{$key}は、{$val[0]}円で、{$val[1]}個存在します。</div>";
+  }
+
+  //問2
+  $cart = [
+    'table' => 1,
+    'bed' => 2,
+  ];
+  echo '<div>商品購入</div>';
+  foreach($cart as $key => $val) {
+    echo "<div>{$key}を、{$val}個ください。</div>";
+
+    $p_num = $products[$key][1];
+
+    if($val <= $p_num) {
+      echo 'はい、ありがとうございます。';
+    } else {
+      echo "すみません。{$key}は、{$p_num}個しかありません。";
+    }
+
+  }
 ?>
