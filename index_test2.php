@@ -113,6 +113,120 @@
     } else {
       echo "すみません。{$key}は、{$p_num}個しかありません。";
     }
-
   }
-?>
+
+  echo '<br>-------------正規表現--------------<br>';
+  //正規表現を使ってみよう
+  /*
+    正規表現とは、文字列のパターンを表現するための方法。
+
+    よく使う表現
+    . 任意の1文字
+    * ０回以上の繰り返し
+    + １回以上の繰り返し
+    {n} n回の繰り返し
+    [] 文字クラスの作成
+    [abc] aまたはbまたはc
+    [^abc] aまたはbまたはc 以外
+    [0-9] 0~9まで
+    [a-z] a~zまで
+    $ 終端一致
+    ^ 先端一致
+    \w 半角英数字とアンダースコア
+    \d 数値
+    \ エスケープ
+    () 文字列の抜き出し
+  */
+
+  $char = 'aAabd1_sscc';
+  //preg_match("/検索したい文字列/", 検索対象の文字列, 第三引数に結果が渡ってくる)
+  //基本、１記号1文字を対象としている。
+  if(preg_match("/[a-zA-Z]{1,2}/i", $char, $result)) {
+    echo '検索成功';
+    //正規表現を使う際は、結果をprint_r()で調べる様にする。
+    print_r($result);
+  } else {
+    echo '検索失敗';
+  }
+  echo '<br>-------------正規表現、理解度チェック--------------<br>';
+  /*
+    １．郵便番号
+    以下のパターンでOK、NGとなるように
+    正規表現を記述してみてください。
+
+    001-0012 -> OK
+    001-001 -> NG
+    2.2-3042 -> NG
+    wd3-2132 -> NG
+    124-56789 -> NG
+  */
+  $zipcode = '001-00122';
+  if(preg_match("/^\d{3}-\d{4}$/", $zipcode, $result)) {
+    echo '正しい郵便番号です。';
+    print_r($result);
+  } else {
+    echo '郵便番号が不正です。';
+  }
+  echo '<br>';
+  /*
+    ２．Email
+    以下のパターンでOK、NGとなるように
+    正規表現を記述してみてください。
+    
+    example000@gmail.com -> OK
+    example-0.00@gmail.com -> OK
+    example-0.00@ex.co.jp -> OK
+    example/0.00@ex.co.jp -> NG
+    . _ - と半角英数字が可能
+  */
+  $email = 'examp/le000@gmail.com';
+  // - は、クラス表記の中では特殊な記号になるため、\をつける。
+  if(preg_match("/^[\w.\-]+@[\w\-]+\.[\w.\-]+$/", $email, $result)) {
+    echo '正しいメールです。';
+    print_r($result);
+  } else {
+    echo 'メールが不正です';
+  }
+  echo '<br>';
+  
+  /*
+    ３．HTML
+    見出しタグ(h1~h6)の中身のみ取得してみてください。
+    -- 対象のHTML
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>見出し１</h1>   
+        <h2>見出し２</h2>   
+        <h3>見出し３</h3>   
+        <header>ヘッダー</header>
+    </body>
+    </html>
+  */
+
+  $html = '<!DOCTYPE html>
+  <html>
+  <head>
+      <title>Document</title>
+  </head>
+  <body>
+      <h1>見出し１</h1>   
+      <h2>見出し２</h2>   
+      <h3>見出し３</h3>   
+      <header>ヘッダー</header>
+  </body>
+  </html>';
+
+  // /の部分は特殊記号のため、\をつける。
+  if(preg_match_all("/<h[1-6]>(.+)<\/h[1-6]>/", $html, $result)) {
+    // print_r($result);
+    //末尾だけ取得する。
+    print_r($result[count($result) - 1]);
+  } 
+
+    
+
+    
