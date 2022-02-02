@@ -47,3 +47,29 @@ echo $arry['key'] . '<br>';
 //null合体演算子（入ってきた値がnullだったら1を返すという式になっている。）
 $arry2['key'] = $arry2['key'] ?? 1;
 echo $arry2['key'] . '<br>';
+
+echo '<br>-------------定数を使ってみよう defineについて復習--------------<br>';
+
+/*
+  * 定数の使い方
+  - define, constでの定義方法。
+  - constは、if文や関数の中では使えない。
+  - defineでは、グローバルスコープに値が配置される。
+  - constは名前空間内に配置される（名前空間のレクチャーで紹介）
+*/
+
+// const TAX_RATE = 0.1;
+
+//defined()関数は、既に定数が定義されているか確認する。
+if(defined('TAX_RATE')) {
+  define('TAX_RATE', 0.1);
+}
+
+function with_tax($base_price, $tax_rate = TAX_RATE) {
+  $sum_price = $base_price + ($base_price * $tax_rate);
+  // round()関数を使うことで(第二引数を省略した場合)、四捨五入できる。
+  $sum_price = round($sum_price);
+  return $sum_price;
+}
+$price = with_tax(1000, 0.08);
+echo $price;
