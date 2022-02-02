@@ -1,11 +1,16 @@
 <?php 
 echo '<br>---クラス---';
 echo '---クラスとthis---';
-// echo '---クラスとStatic---';
+echo '---クラスとStatic---';
 /*
   - クラス
   新しくオブジェクトを作成するための雛形。
   オブジェクトとは、特定の変数を持っていたり特定の関数を保持している構造体(一つのまとまり)のこと。
+
+  - staticメソッド（静的メソッド）
+  staticの中ではthisが使用できない。
+  staticメソッドは、クラス自体に登録するメソッド。
+  クラス内で使用する際は、static::名前を使用するのが一般的。
 */
 
 class Person
@@ -13,6 +18,9 @@ class Person
   //クラス内で変数を定義する場合には、アクセスの範囲を指定するキーワード（public, private）をつける。
   public $name;
   public $age;
+  //static　プロパティで用いる場合
+  public static $whereTolive = 'Earth';
+  public const live = 'earth2';
 
   //newを使った際に呼ばれる関数
   function __construct($name, $age)
@@ -23,6 +31,9 @@ class Person
 
   function hello() {
     echo 'hello, ' . $this->name . '<br>';
+    //クラス内で使用する際は、static::名前を使用するのが一般的。
+    static::hoge();
+    echo static::live;
     //returnの$thisは、生成した後のオブジェクトを指し示す。
     return $this;
   }
@@ -30,6 +41,10 @@ class Person
   function bye() {
     echo 'bye, ' . $this->name . '<br>';
     return $this;
+  }
+
+  static function hoge() {
+    echo 'hoge';
   }
 }
 
@@ -44,3 +59,9 @@ $bob->bye();
 
 $tim = new Person('Tim', 32);
 $tim->hello()->bye();
+
+//staticの実行
+Person::hoge();
+echo '<br>';
+echo Person::$whereTolive;
+
