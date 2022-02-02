@@ -104,3 +104,18 @@ fn1();
 require_once('index_test4_2.php');
 require_once('index_test4_2.php');
 require_once('index_test4_2.php');
+
+echo '<br>-------------パスの書き方について学ぼう--------------<br>';
+/*
+  - マジック定義 __DIR__, __FILE__を使ってみよう。
+  - dirnameの使い方を学ぼう。
+  - 相対パスと絶対パス
+  - \と/は使い分けよう
+  - "と'は使い分けよう
+*/
+
+echo __DIR__;
+echo '<br>';
+echo __FILE__;
+
+echo '<br>-------------名前空間について学ぼう--------------<br>';
