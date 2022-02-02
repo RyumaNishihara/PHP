@@ -73,3 +73,34 @@ function with_tax($base_price, $tax_rate = TAX_RATE) {
 }
 $price = with_tax(1000, 0.08);
 echo $price;
+
+echo '<br>-------------ファイル分割の方法を学ぼう--------------<br>';
+/*
+  ファイル分割の方法を学ぼう
+
+  - require, includeの違い
+  requireは、エラーが起こったところで処理が止まる。（関数の読み込みに使う）
+  includeは、エラーが発生しても最後まで処理が実行される。（最悪なくても問題無いHTMLのテンプレートなどに使われる。）
+
+  require 'ファイル名';
+  include 'ファイル名';
+  の記述方法も可能。
+  
+  - require, require_onceの使い方
+
+*/
+$arry = [
+  'num' => 0,
+];
+
+//index_test4_1.phpファイルの読み込み
+require('index_test4_1.php');
+//使いたい関数を実行する
+fn1();
+
+//読み込むとHTMLも表示される。
+//読み込むたびに表示される。１回だけ読み込んで欲しい場合は、require_once('ファイル名')を使う。
+//他の読み込みは無視される。
+require_once('index_test4_2.php');
+require_once('index_test4_2.php');
+require_once('index_test4_2.php');
