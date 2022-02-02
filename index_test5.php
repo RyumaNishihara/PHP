@@ -1,5 +1,7 @@
 <?php 
-echo '<br>-------------クラス--------------<br>';
+echo '<br>---クラス---';
+echo '---クラスとthis---';
+// echo '---クラスとStatic---';
 /*
   - クラス
   新しくオブジェクトを作成するための雛形。
@@ -20,7 +22,14 @@ class Person
   }
 
   function hello() {
-    echo 'hello, ' . $this->name;
+    echo 'hello, ' . $this->name . '<br>';
+    //returnの$thisは、生成した後のオブジェクトを指し示す。
+    return $this;
+  }
+
+  function bye() {
+    echo 'bye, ' . $this->name . '<br>';
+    return $this;
   }
 }
 
@@ -31,3 +40,7 @@ echo $bob->age;
 echo '<br>';
 //メソッドの呼び出し
 $bob->hello();
+$bob->bye();
+
+$tim = new Person('Tim', 32);
+$tim->hello()->bye();
