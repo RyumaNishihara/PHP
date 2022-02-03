@@ -29,7 +29,8 @@ class Person
     $this->age = $age;
   }
 
-  function hello() {
+  //final メソッドの先頭につけると、継承先のクラスで変更できない様にする。
+  final function hello() {
     echo 'hello, ' . $this->name . '<br>';
     //クラス内で使用する際は、static::名前を使用するのが一般的。
     static::hoge();
@@ -47,7 +48,17 @@ class Person
     echo 'hoge';
   }
 }
+// クラスの継承
+class Japanese extends Person
+{
+  //継承元のメソッドを変更することを、オーバーライトと呼ぶ。
+  function bye() {
+    echo 'バイバイ, ' . $this->name . '<br>';
+    return $this;
+  }
+}
 
+//Pesonクラスの実行
 $bob = new Person('Bob', 18);
 echo $bob->name;
 echo $bob->age;
@@ -65,3 +76,48 @@ Person::hoge();
 echo '<br>';
 echo Person::$whereTolive;
 
+//Japaneseクラスの実行
+$taro = new Japanese('太郎', 5);
+echo '<br>';
+echo $taro->name;
+echo '<br>';
+$taro->bye();
+
+echo '<br>-------------testスペース--------------<br>';
+
+//abstractを含むクラスには、クラス名にもabstractを記載する。
+//abstractをつけたクラスはインスタンス化できない。継承先で呼び出す。
+abstract class Test
+{
+  //protectedは、アクセス範囲を指定するキーワード。自クラス内か継承したクラス内で使える様になる。
+  protected $test;
+
+  function __construct($test)
+  {
+    $this->test = $test;
+  }
+
+  function hello() {
+    echo 'hello, ' . $this->test . '<br>';
+    return $this;
+  }
+
+  //abstract 継承先で実装するための明示
+  abstract function abs();
+}
+
+class Test2 extends Test
+{
+  function abs() {
+    echo 'abs';
+  }
+}
+
+//Testクラスの実行
+// $test = new Test('test');
+// $test->hello();
+
+//Test2クラスの実行
+$test2 = new Test2('test2');
+$test2->abs();
+$test2->hello();
